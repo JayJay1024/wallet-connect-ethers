@@ -10,8 +10,8 @@ export default function Ethers() {
       projectId: "12c48c2a9521b1447d902c9e06ddfe79", // REQUIRED your projectId
       chains: [1, 44, 46], // REQUIRED chain ids
       showQrModal: true, // REQUIRED set to "true" to use @web3modal/standalone,
-      // methods, // OPTIONAL ethereum methods
-      // events, // OPTIONAL ethereum events
+      methods: ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "personal_sign", "eth_signTypedData"], // OPTIONAL ethereum methods
+      events: ["chainChanged", "accountsChanged"], // OPTIONAL ethereum events
       rpcMap: {
         "1": "https://eth-mainnet.g.alchemy.com/v2/1fYUXWGBTu0naj6Stf7Sh77VAO-J5j4v",
         "44": "https://crab-rpc.darwinia.network",
@@ -23,7 +23,7 @@ export default function Ethers() {
         url: "https://www.google.com/",
         icons: [],
       }, // OPTIONAL metadata of your app
-      // qrModalOptions // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/2.0/web3modal/options
+      // qrModalOptions, // OPTIONAL - `undefined` by default, see https://docs.walletconnect.com/2.0/web3modal/options
     });
 
     p.on("display_uri", (uri: string) => {
@@ -31,8 +31,8 @@ export default function Ethers() {
     });
 
     console.log("before enable", p.accounts, p.chainId, p.connected, p.connecting, p.namespace);
-    // const dd = await p.enable();
-    const dd = await p.connect();
+    const dd = await p.enable();
+    // const dd = await p.connect();
     console.log("result", dd);
     console.log("after enable", p.accounts, p.chainId, p.connected, p.connecting, p.namespace);
 
